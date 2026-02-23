@@ -89,14 +89,20 @@ Resumo
 - Muito usadas em programação funcional e em decorators
 """
 
-def criar_saudacao(saudacao, nome):
-    def saudar():
+def criar_saudacao(saudacao):
+    def saudar(nome):
         return f'{saudacao}, {nome}!'
     return saudar
     
 
-s1 = criar_saudacao('Bom dia', 'João')
-s2 = criar_saudacao('Boa noite', 'João')
+falar_bom_dia = criar_saudacao('Bom dia')
+falar_boa_noite = criar_saudacao('Boa noite')
 
-print(s1())
-print(s2())
+# print(falar_bom_dia('João'))
+# print(falar_bom_dia('Luiz'))
+# print(falar_boa_noite('João'))
+# print(falar_boa_noite('Luiz'))
+
+for nome in ['Maria', 'João', 'Luiz', 'Carlos']:
+    print(falar_bom_dia(nome))
+    print(falar_boa_noite(nome))
