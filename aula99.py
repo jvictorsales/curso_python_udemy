@@ -113,23 +113,35 @@ Packages são essenciais para organizar projetos Python maiores
 e permitem estruturar o código de forma modular e escalável.
 """
 
-from sys import path
+# https://stackoverflow.com/questions/2386714/why-is-import-bad
 
-import aula99_package.modulo
-from aula99_package import modulo
-from aula99_package.modulo import soma_do_modulo, fala_oi
-from aula99_package.modulo import *
+# from sys import path
 
-print(__name__)
-print(*path, sep='\n')
+# import aula99_package.modulo
+# from aula99_package import modulo
+# from aula99_package.modulo import soma_do_modulo, fala_oi
+# from aula99_package.modulo import *
+
+# print(__name__)
+# print(*path, sep='\n')
 
 
-print(aula99_package.modulo.soma_do_modulo(2, 3))
-print(modulo.soma_do_modulo(2, 3))
+# print(aula99_package.modulo.soma_do_modulo(2, 3))
+# print(modulo.soma_do_modulo(2, 3))
+# print(soma_do_modulo(2, 3))
+# print(variavel)
+# print(nova_variavel)
+
+# aula99_package.modulo.fala_oi()
+# modulo.fala_oi()
+# fala_oi()
+
+# import aula99_package
+from aula99_package import soma_do_modulo, falar_oi
+
+# print(aula99_package.dobra(2))
+# print(aula99_package.soma_do_modulo(2, 3))
 print(soma_do_modulo(2, 3))
-print(variavel)
-print(nova_variavel)
-
-aula99_package.modulo.fala_oi()
-modulo.fala_oi()
-fala_oi()
+# print(aula99_package.variavel)
+# print(aula99_package.nova_variavel)
+falar_oi()
