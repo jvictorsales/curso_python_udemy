@@ -91,6 +91,7 @@
 
 
 import os
+import json
 
 def limpar_tela():
     os.system('cls')
@@ -142,24 +143,75 @@ def exibir_tarefas(lista_de_tarefas):
         print(f'\t- {tarefa}')
     print()
 
-lista_de_tarefas = []
+# def salvar_dados(lista_de_tarefas, caminho_arquivo):
+#     with open(caminho_arquivo, 'w', encoding='utf8') as file:
+#         json.dump(lista_de_tarefas, file, indent=2, ensure_ascii=False)
+
+# def carregar_dados(caminho_arquivo):
+#     if os.path.exists(caminho_arquivo):
+#         with open(caminho_arquivo) as file:
+#             lista_de_tarefas = json.load(file)
+#             return lista_de_tarefas
+#     return []
+
+
+def ler(lista_de_tarefas, caminho_arquivo):
+    dados = []
+    try:
+        with open(caminho_arquivo, 'r', encoding='utf8') as arquivo:
+            dados = json.load(arquivo)
+    except FileNotFoundError:
+        print('Arquivo não existe.')
+        salvar(lista_de_tarefas, caminho_arquivo)
+
+    return dados
+
+def salvar(lista_de_tarefas, caminho_arquivo):
+    dados = lista_de_tarefas
+    with open(caminho_arquivo, 'w', encoding='utf8') as arquivo:
+        dados = json.dump(lista_de_tarefas, arquivo, indent=2, ensure_ascii=False)
+    return dados
+
+CAMINHO_ARQUIVO = 'aula119.json'
+# lista_de_tarefas = carregar_dados(CAMINHO_ARQUIVO)
+lista_de_tarefas = ler([], CAMINHO_ARQUIVO)
 lista_de_tarefas_removidas = []
 
 while True:
     print()
-    print('Comandos: listar, desfazer, refazer, sair')
+    # print('Comandos: listar, desfazer, refazer, clear, salvar, sair')
+    print('Comandos: listar, desfazer, refazer, clear, sair')
     tarefa = input('Digite uma tarefa ou comando: ').strip()
     
+    # if tarefa == 'sair':
+    #     print()
+    #     print('Saindo...')
+    #     print()
+    #     break
+    # elif tarefa == 'listar':
+    #     exibir_tarefas(lista_de_tarefas)
+    # elif tarefa == 'desfazer':
+    #     defazer_tarefa(lista_de_tarefas, lista_de_tarefas_removidas)
+    # elif tarefa == 'refazer':
+    #     refazer_tarefa(lista_de_tarefas, lista_de_tarefas_removidas)
+    # else:
+    #     adicionar_tarefa(tarefa, lista_de_tarefas)
+
     if tarefa == 'sair':
         print()
         print('Saindo...')
         print()
         break
-    elif tarefa == 'listar':
-        exibir_tarefas(lista_de_tarefas)
-    elif tarefa == 'desfazer':
-        defazer_tarefa(lista_de_tarefas, lista_de_tarefas_removidas)
-    elif tarefa == 'refazer':
-        refazer_tarefa(lista_de_tarefas, lista_de_tarefas_removidas)
-    else:
-        adicionar_tarefa(tarefa, lista_de_tarefas)
+
+    comandos = {
+        'listar': lambda: exibir_tarefas(lista_de_tarefas),
+        'desfazer': lambda: defazer_tarefa(lista_de_tarefas, lista_de_tarefas_removidas),
+        'refazer': lambda: refazer_tarefa(lista_de_tarefas, lista_de_tarefas_removidas),
+        'clear': lambda: limpar_tela(),
+        'adicionar': lambda: adicionar_tarefa(tarefa, lista_de_tarefas),
+        # 'salvar': lambda: salvar_dados(lista_de_tarefas, CAMINHO_ARQUIVO)
+    }
+
+    comando = comandos.get(tarefa, comandos['adicionar'])
+    comando()
+    salvar(lista_de_tarefas, CAMINHO_ARQUIVO)
