@@ -74,6 +74,29 @@ Conclusão:
     para um código mais flexível, reutilizável e fácil de manter.
 """
 
+# class Carro:
+#     def __init__(self, nome):
+#         self.nome = nome
+
+#     def acelerar(self):
+#         print(f'{self.nome} está acelerando...')
+
+# fusca = Carro('Fusca')
+# print(fusca.nome)
+# fusca.acelerar()
+
+# print()
+
+# celta = Carro(nome='Celta')
+# print(celta.nome)
+# celta.acelerar()
+
+# Entendendo self em classes Python
+# Classe - Molde (geralmente sem dados)
+# Instancia da classe (objeto) - Tem os dados
+# Uma classe pode gerar várias instâncias.
+# Na classe o self é a própria instância.
+
 class Carro:
     def __init__(self, nome):
         self.nome = nome
@@ -82,11 +105,13 @@ class Carro:
         print(f'{self.nome} está acelerando...')
 
 fusca = Carro('Fusca')
-print(fusca.nome)
 fusca.acelerar()
+Carro.acelerar(fusca)
+# print(fusca.nome)
 
 print()
 
 celta = Carro(nome='Celta')
-print(celta.nome)
 celta.acelerar()
+Carro.acelerar(celta)
+# print(celta.nome)
