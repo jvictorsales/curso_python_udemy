@@ -43,32 +43,31 @@ Boas práticas:
    - Use __ (private) apenas quando necessário (ex: evitar conflitos em herança).
 """
 
-from functools import partial
+# from functools import partial
 
 class Foo:
-    def __init__(self):
-        self.public = 'isso é público'
-        self._protected = 'isso é protegido'
-        self.__private = 'isso é privado'
+   def __init__(self):
+      self.public = 'isso é public'
+      self._protected = 'isso é protected'
+      self.__private = 'isso é private'
 
-    def metodo_publico(self):
-        # self._metodo_protected()
-        # print(self._protected)
-        # print(self.__private)
-        # self.__metodo_privado()
-        return 'metodo_publico'
+   def metodo_publico(self):
+      return 'metodo_publico'
     
-    def _metodo_protected(self):
-        # print('_metodo_protected')
-        return '_metodo_protected'
+   def _metodo_protected(self):
+      return '_metodo_protected'
 
-    def __metodo_privado(self):
-        # print('_metodo_privado')
-        return '__metodo_privado'
+   def __metodo_private(self):
+      return '__metodo_private'
+    
 
 f = Foo()
 print(f.public)
-# print(f._protected)  # funciona mas não deveria estar aqui
 print(f.metodo_publico())
-# print(f._metodo_protected())  # funciona mas não deveria estar aqui
-# print(f._Foo__metodo_privado())
+print()
+print(f._protected)  # Não deveria estar aqui
+print(f._metodo_protected())  # Não deveria estar aqui
+print()
+print(f._Foo__private)  # Não deveria estar aqui
+print(f._Foo__metodo_private())  # Não deveria estar aqui
+print()
