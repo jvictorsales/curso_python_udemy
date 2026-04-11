@@ -42,9 +42,6 @@ class Ponto:
         return resultado_self > resultado_other
             
 
-class Carrinho:
-    ...
-
 if __name__ == '__main__':
     # p1 = Ponto(1, 2)
     # p2 = Ponto(978, 876)
